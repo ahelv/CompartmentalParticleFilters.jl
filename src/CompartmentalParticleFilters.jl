@@ -3,7 +3,6 @@ module CompartmentalParticleFilters
 ## change function names and struct names to comply with julia naming conventions ##
 
 ## dependencies ##
-using CSV
 using Random
 using LinearAlgebra
 using Plots
@@ -44,4 +43,7 @@ export makeTrans, makeTransSpatial
 include("simulate.jl")
 export simEpidemic
 
+# neighbors.jl
+include("neighbors.jl")
+export distMat
 end
