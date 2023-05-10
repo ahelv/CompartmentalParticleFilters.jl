@@ -1,7 +1,7 @@
 # functions to update the states and parameters in the particle filter
 
 # updating the compartment counts 
-function UpdateCounts!(transition, compartments, parameters, θ, t, n, Nloc)
+function updatecounts!(transition, compartments, parameters, θ, t, n, Nloc)
     comps = Dict()
     for key in keys(compartments)
         push!(comps, key => reduce(vcat, compartments[key][t][n].count))
@@ -35,6 +35,6 @@ function UpdateCounts!(transition, compartments, parameters, θ, t, n, Nloc)
 end
 
 # updating the time varying parameters
-function UpdateParameters!(evolve, params, parameters, θ, t, n, nLoc)
+function updateparameters!(evolve, params, parameters, θ, t, n, nLoc)
     parameters[evolve.param][t+1][n] = parameter(evolve.param, evolve.evolution(params, θ, t, nLoc))
 end

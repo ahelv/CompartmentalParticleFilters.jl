@@ -12,27 +12,27 @@ Distributions.mean(d::MultPoisson) = d.λ
 Distributions.var(d::MultPoisson) = d.λ
 
 # disease compartment (S, E, I, R, etc.)
-mutable struct compartment
+mutable struct Compartment
     const name::Symbol
     count::Vector
     change::Vector
 end
 
 # epidemic parameter
-mutable struct parameter
+mutable struct Parameter
     const name::Symbol
     val::Vector
 end
 
 # transition function for movement between compartments 
-struct transition
+struct Transition
     trans::Function
     outComp::Symbol
     inComp::Symbol
 end
 
 # parameter evolutions for time varying parameters 
-struct evolve
+struct Evolve
     evolution::Function
     param::Symbol
 end

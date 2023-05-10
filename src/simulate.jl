@@ -1,4 +1,4 @@
-function simEpidemic(Nt::Int, θ::NamedTuple, θt::NamedTuple,
+function simulate_epidemic(Nt::Int, θ::NamedTuple, θt::NamedTuple,
     compartments::NamedTuple, transitions::Vector, evolutions::Vector)
     n = 1
     nComp = length(compartments)
@@ -10,7 +10,7 @@ function simEpidemic(Nt::Int, θ::NamedTuple, θt::NamedTuple,
     epid = Dict()
     for l = eachindex(compartments)
         init = compartments[l]
-        array = [Array{compartment}(undef, 1) for _ in 1:Nt]
+        array = [Array{Compartment}(undef, 1) for _ in 1:Nt]
         array[1] = [compartment(l, init, zeros(nLoc))]
         push!(epid, l => array)
     end
@@ -18,7 +18,7 @@ function simEpidemic(Nt::Int, θ::NamedTuple, θt::NamedTuple,
     parameters = Dict()
     for l = eachindex(θt)
         init = θt[l]
-        array = [Array{parameter}(undef, 1) for _ in 1:Nt]
+        array = [Array{Parameter}(undef, 1) for _ in 1:Nt]
         array[1] = [parameter(l, init)]
         push!(parameters, l => array)
     end
@@ -31,10 +31,10 @@ function simEpidemic(Nt::Int, θ::NamedTuple, θt::NamedTuple,
             push!(params_tn, key => parameters[key][t][n])
         end
         for trans in transitions
-            UpdateCounts!(trans, epid, params_tn, θ, t, n, nLoc)
+            updatecounts!(trans, epid, params_tn, θ, t, n, nLoc)
         end
         for e in evolutions
-            UpdateParameters!(e, params_tn, parameters, θ, t, n, nLoc)
+            updateparameters!(e, params_tn, parameters, θ, t, n, nLoc)
         end
     end
     tmpC = collect(values(epid))

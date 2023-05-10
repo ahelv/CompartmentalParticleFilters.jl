@@ -1,6 +1,6 @@
 # functions for generating distance matrices 
 
-function distMat(nLoc)
+function distmat(nLoc)
     dim = Int(sqrt(nLoc))
     idxmat = reshape(1:nLoc, dim, dim)
     D = zeros(Float64, nLoc, nLoc)

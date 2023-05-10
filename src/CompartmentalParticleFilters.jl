@@ -33,17 +33,17 @@ export UpdateCounts!, UpdateParameters!
 
 # checks.jl
 include("checks.jl")
-export equalLength
+export equallength
 
 # genfuncs.jl
 include("genfuncs.jl")
-export makeTrans, makeTransSpatial
+export maketrans, maketrans_spatial
 
 # simulate.jl
 include("simulate.jl")
-export simEpidemic
+export simulate_epidemic
 
 # neighbors.jl
 include("neighbors.jl")
-export distMat
+export distmat
 end
