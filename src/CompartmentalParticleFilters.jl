@@ -13,11 +13,11 @@ using StatsBase
 ## My Contributions ##
 # filter.jl
 include("filter.jl")
-export pf
+export filter
 
 # structs.jl
 include("structs.jl")
-export MultPoisson, compartment, parameter, transition, evolve
+export MultPoisson, Compartment, Parameter, Transition, Evolve
 
 # resample.jl
 include("resample.jl")
@@ -29,7 +29,7 @@ export log_normalize
 
 # updates.jl
 include("updates.jl")
-export UpdateCounts!, UpdateParameters!
+export updatecounts!, updateparameters!
 
 # checks.jl
 include("checks.jl")

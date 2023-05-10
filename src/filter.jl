@@ -1,6 +1,6 @@
 # particle filtering algorithm 
 
-function pf(y::Vector, N::Int, θ::NamedTuple, θt::NamedTuple, g::Function,
+function filter(y::Vector, N::Int, θ::NamedTuple, θt::NamedTuple, g::Function,
     compartments::NamedTuple, transitions::Vector, evolutions::Vector)
 
     # check if the number of locations is the same for each compartment
