@@ -34,7 +34,16 @@ function updatecounts!(transition, compartments, parameters, θ, t, n, Nloc)
     end
 end
 
-# updating the time varying parameters
-function updateparameters!(evolve, params, parameters, θ, t, n, nLoc)
-    parameters[evolve.param][t+1][n] = parameter(evolve.param, evolve.evolution(params, θ, t, nLoc))
+# evolution for time varying parameters
+function evolveparameters!(evolve, params, parameters, θ, t, n, nLoc)
+    parameters[evolve.param][t+1][n] = parameter(evolve.param,
+        evolve.evolution(params, θ, t, nLoc))
 end
+
+# propose new values for unknown parameters 
+function proposeparameters!(propose, params, parameters, θ, t, n, nLoc)
+    parameters[propose.param][t+1][n] = parameter(propose.param,
+        propose.proposal(params, θ, t, nLoc))
+end
+
+
