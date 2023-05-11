@@ -4,7 +4,7 @@ function filter(y::Vector, N::Int, θ::NamedTuple, θt::NamedTuple, g::Function,
     compartments::NamedTuple, transitions::Vector, evolutions::Vector)
 
     # check if the number of locations is the same for each compartment
-    @assert equallength(compartments) "All compartments must have the same number of spatial locations."
+    @assert equallength(compartments) raw"All compartments must have the same number of spatial locations."
     Nloc = length(compartments[1])
     Nthresh = 0.25 * N # threshold for effective sample size
     T = length(y)
@@ -53,8 +53,11 @@ function filter(y::Vector, N::Int, θ::NamedTuple, θt::NamedTuple, g::Function,
             for trans in transitions
                 updatecounts!(trans, particles, params_tn, θ, t, n, Nloc)
             end
+            for p in proposals
+                proposeparameters!(p, params_tn, parameters, θ, t, n, Nloc)
+            end
             for e in evolutions
-                updateparameters!(e, params_tn, parameters, θ, t, n, Nloc)
+                evolveparameters!(e, params_tn, parameters, θ, t, n, Nloc)
             end
         end
         # # measurement update 
